@@ -1,21 +1,17 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // Elementy nawigacji
   const mainPanelLink = document.getElementById("main-panel");
   const myReservationsLink = document.getElementById("my-reservations");
 
-  // Widoki
   const mainView = document.getElementById("main-view");
   const reservationView = document.getElementById("reservation-view");
   const myReservationsView = document.getElementById("my-reservations-view");
 
-  // Komunikat sukcesu
   const successMessage = document.getElementById("success-message");
   const successText = document.getElementById("success-text");
   const reservationInfo = document.getElementById("reservation-info");
   const viewReservationsLink = document.getElementById("view-reservations");
-  const closeSuccessBtn = document.querySelector(".success-message .close-btn"); // Sprecyzowanie selektora
+  const closeSuccessBtn = document.querySelector(".success-message .close-btn");
 
-  // Elementy niestandardowego okna dialogowego potwierdzenia
   const confirmDialogOverlay = document.getElementById(
     "confirm-dialog-overlay"
   );
@@ -25,10 +21,9 @@ document.addEventListener("DOMContentLoaded", function () {
   const confirmDialogCancelBtn = document.getElementById(
     "confirm-dialog-cancel"
   );
-  let confirmCallback = null; // Zmienna do przechowywania funkcji callback
+  let confirmCallback = null;
 
-  // Przyciski i elementy interaktywne
-  let resourceCards = document.querySelectorAll(".resource-card"); // Zmienione na let, aby można było aktualizować
+  let resourceCards = document.querySelectorAll(".resource-card");
   const tabButtons = document.querySelectorAll(".tab-button");
   const backToListBtn = document.getElementById("back-to-list");
   const timeSlots = document.querySelectorAll(".time-slot");
@@ -36,12 +31,10 @@ document.addEventListener("DOMContentLoaded", function () {
   reserveBtn.classList.add("btn");
   const datePicker = document.getElementById("date-picker");
 
-  // Elementy do aktualizacji
   const reservationTitle = document.getElementById("reservation-title");
   const reservationDate = document.getElementById("reservation-date");
   const reservationCapacity = document.getElementById("reservation-capacity");
 
-  // Dane zasobów
   const resources = {
     "sala-a": {
       name: "Sala Konferencyjna A",
@@ -87,22 +80,17 @@ document.addEventListener("DOMContentLoaded", function () {
     },
   };
 
-  // Przechowywanie rezerwacji
   let userReservations = [];
   let selectedRoom = null;
   let selectedTime = null;
 
-  // Funkcja do przełączania widoków
   function showView(view) {
-    // Ukryj wszystkie widoki
     mainView.classList.add("hidden");
     reservationView.classList.add("hidden");
     myReservationsView.classList.add("hidden");
 
-    // Pokaż wybrany widok
     view.classList.remove("hidden");
 
-    // Aktualizacja aktywnego linku w nawigacji
     if (view === mainView) {
       mainPanelLink.classList.add("active");
       myReservationsLink.classList.remove("active");
@@ -112,10 +100,9 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  // Funkcja do renderowania kart zasobów
   function renderResourceCards(filterCategory = "all") {
     const resourcesContainer = document.querySelector(".resources-container");
-    resourcesContainer.innerHTML = ""; // Wyczyść istniejące karty
+    resourcesContainer.innerHTML = "";
 
     Object.keys(resources).forEach((key) => {
       const resource = resources[key];
@@ -124,17 +111,14 @@ document.addEventListener("DOMContentLoaded", function () {
         card.className = "resource-card";
         card.setAttribute("data-room", key);
 
-        // Różne wyświetlanie informacji w zależności od kategorii zasobu
         let detailsHTML = "";
 
         if (resource.category === "computer-equipment") {
-          // Dla sprzętu komputerowego pokazujemy specyfikację zamiast pojemności
           detailsHTML = `
             <p>Specyfikacja: ${resource.equipment}</p>
             <p>Dostępność: Natychmiastowa</p>
           `;
         } else {
-          // Dla innych kategorii pokazujemy standardowe informacje
           detailsHTML = `
             <p>Pojemność: ${resource.capacity}</p>
             <p>Wyposażenie: ${resource.equipment}</p>
@@ -149,12 +133,10 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
 
-    // Ponownie przypisz event listenery do nowo utworzonych kart
     resourceCards = document.querySelectorAll(".resource-card");
     addEventListenersToResourceCards();
   }
 
-  // Funkcja do dodawania event listenerów do kart zasobów
   function addEventListenersToResourceCards() {
     resourceCards.forEach((card) => {
       card.addEventListener("click", function () {
@@ -162,15 +144,11 @@ document.addEventListener("DOMContentLoaded", function () {
         selectedRoom = roomId;
         const room = resources[roomId];
 
-        // Aktualizacja widoku rezerwacji
         reservationTitle.textContent = `Rezerwacja: ${room.name}`;
         reservationDate.textContent = datePicker.value;
 
-        // Różne wyświetlanie informacji w zależności od kategorii zasobu
         if (room.category === "computer-equipment") {
-          // Dla sprzętu komputerowego pokazujemy specyfikację zamiast pojemności
           reservationCapacity.textContent = room.equipment;
-          // Zmień etykietę na "Specyfikacja" zamiast "Pojemność"
           const capacityLabel = document.querySelector(
             'label[for="reservation-capacity"], .reservation-details p'
           );
@@ -184,9 +162,7 @@ document.addEventListener("DOMContentLoaded", function () {
             );
           }
         } else {
-          // Dla innych kategorii pokazujemy standardowe informacje
           reservationCapacity.textContent = room.capacity;
-          // Przywróć etykietę "Pojemność"
           const capacityLabel = document.querySelector(
             'label[for="reservation-capacity"], .reservation-details p'
           );
@@ -201,21 +177,16 @@ document.addEventListener("DOMContentLoaded", function () {
           }
         }
 
-        // Pokaż widok rezerwacji
         showView(reservationView);
       });
     });
   }
 
-  // Obsługa kliknięcia na zakładki kategorii
   tabButtons.forEach((button) => {
     button.addEventListener("click", function () {
-      // Zaktualizuj style i klasy dla wszystkich zakładek
       tabButtons.forEach((btn) => {
         btn.classList.remove("tab-active");
-        // btn.style.color = "#333"; // Kolor nieaktywnych zakładek jest zarządzany przez CSS z !important
       });
-      // Dodaj klasę 'tab-active' dla klikniętej zakładki
       this.classList.add("tab-active");
 
       const category = this.getAttribute("data-category");
@@ -223,36 +194,26 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Ustawienie początkowego stanu aktywnej zakładki (jeśli istnieje)
   const initialActiveTab = document.querySelector(".tab-button.tab-active");
   if (initialActiveTab) {
-    initialActiveTab.style.color = "white"; // Ustawienie koloru dla początkowo aktywnej zakładki
+    initialActiveTab.style.color = "white";
   }
 
-  // Początkowe renderowanie kart zasobów - wywołanie po załadowaniu DOM
-  // renderResourceCards(); // Usunięto to wywołanie, ponieważ jest już na końcu pliku
-
-  // Obsługa przycisku powrotu do listy
   backToListBtn.addEventListener("click", function (e) {
     e.preventDefault();
     showView(mainView);
-    // Resetuj wybór godziny
     timeSlots.forEach((slot) => slot.classList.remove("selected"));
     selectedTime = null;
   });
 
-  // Obsługa wyboru godziny
   timeSlots.forEach((slot) => {
     slot.addEventListener("click", function () {
-      // Usuń klasę 'selected' ze wszystkich slotów
       timeSlots.forEach((s) => s.classList.remove("selected"));
-      // Dodaj klasę 'selected' do klikniętego slotu
       this.classList.add("selected");
       selectedTime = this.textContent;
     });
   });
 
-  // Obsługa przycisku rezerwacji
   reserveBtn.addEventListener("click", function () {
     if (!selectedTime) {
       alert("Proszę wybrać godzinę rezerwacji.");
@@ -262,40 +223,33 @@ document.addEventListener("DOMContentLoaded", function () {
     const room = resources[selectedRoom];
     const date = datePicker.value;
 
-    // Dodaj rezerwację do listy
     userReservations.push({
       room: room.name,
       date: date,
       time: selectedTime,
     });
 
-    // Aktualizuj widok moich rezerwacji
     updateMyReservationsView();
 
-    // Wyświetl komunikat sukcesu
     successText.textContent = "Twoja rezerwacja została pomyślnie utworzona.";
     reservationInfo.textContent = `Zasób: ${room.name}, Data: ${formatDate(
       date
     )}, Godzina: ${selectedTime}`;
     successMessage.classList.remove("hidden");
 
-    // Przejdź do widoku głównego
     showView(mainView);
   });
 
-  // Obsługa zamknięcia komunikatu sukcesu
   closeSuccessBtn.addEventListener("click", function () {
     successMessage.classList.add("hidden");
   });
 
-  // Obsługa linku do rezerwacji w komunikacie sukcesu
   viewReservationsLink.addEventListener("click", function (e) {
     e.preventDefault();
     successMessage.classList.add("hidden");
     showView(myReservationsView);
   });
 
-  // Obsługa linków nawigacyjnych
   mainPanelLink.addEventListener("click", function (e) {
     e.preventDefault();
     showView(mainView);
@@ -306,7 +260,6 @@ document.addEventListener("DOMContentLoaded", function () {
     showView(myReservationsView);
   });
 
-  // Funkcja aktualizująca widok moich rezerwacji
   function updateMyReservationsView() {
     const reservationsList = document.querySelector(".reservations-list");
     reservationsList.innerHTML = "";
@@ -329,7 +282,6 @@ document.addEventListener("DOMContentLoaded", function () {
       reservationsList.appendChild(reservationItem);
     });
 
-    // Dodaj obsługę przycisków usuwania
     const deleteButtons = document.querySelectorAll(".btn-danger");
     deleteButtons.forEach((button) => {
       button.addEventListener("click", function () {
@@ -339,7 +291,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Funkcja wyświetlająca niestandardowe okno dialogowe potwierdzenia
   function showConfirmDialog(title, text, callback) {
     confirmDialogTitle.textContent = title;
     confirmDialogText.textContent = text;
@@ -347,7 +298,6 @@ document.addEventListener("DOMContentLoaded", function () {
     confirmDialogOverlay.classList.add("visible");
   }
 
-  // Obsługa przycisków w niestandardowym oknie dialogowym
   confirmDialogOkBtn.addEventListener("click", function () {
     if (confirmCallback) {
       confirmCallback();
@@ -361,7 +311,6 @@ document.addEventListener("DOMContentLoaded", function () {
     confirmCallback = null;
   });
 
-  // Funkcja usuwająca rezerwację
   function deleteReservation(index) {
     const reservation = userReservations[index];
     const dialogTitle = "Potwierdzenie usunięcia";
@@ -372,7 +321,6 @@ document.addEventListener("DOMContentLoaded", function () {
     showConfirmDialog(dialogTitle, dialogText, function () {
       userReservations.splice(index, 1);
       updateMyReservationsView();
-      // Wyświetl komunikat sukcesu
       successText.textContent = "Rezerwacja została pomyślnie usunięta.";
       reservationInfo.textContent = `Usunięto: ${
         reservation.room
@@ -381,21 +329,17 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Funkcja formatująca datę
   function formatDate(dateString) {
     const date = new Date(dateString);
     return date.toISOString().split("T")[0].split("-").reverse().join("-");
   }
 
-  // Inicjalizacja - dodaj przykładową rezerwację
   userReservations.push({
     room: "Sala Konferencyjna A",
     date: "2025-06-08",
     time: "09:00",
   });
 
-  // Aktualizuj widok moich rezerwacji
   updateMyReservationsView();
-  // Początkowe renderowanie kart zasobów po załadowaniu DOM i zainicjowaniu innych elementów
   renderResourceCards();
 });
