@@ -1,0 +1,418 @@
+:root {
+  --primary-color: #3498db;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+/* Resetowanie stylów */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: #f4f7f6; /* Jaśniejszy, bardziej neutralny szary */
+  color: #333;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased; /* Lepsze renderowanie czcionek */
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Nagłówek */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  padding: 15px 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+header h1 {
+  color: #2c3e50; /* Ciemniejszy, bardziej stonowany niebieski */
+  font-size: 28px; /* Nieco większy */
+  font-weight: 600;
+}
+
+.user-info {
+  font-size: 14px;
+}
+
+/* Nawigacja */
+nav {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+}
+
+nav ul li a {
+  display: block;
+  padding: 15px 20px;
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+nav ul li a:hover {
+  background-color: #f5f5f5;
+}
+
+nav ul li a.active {
+  color: #3498db; /* Jaśniejszy niebieski dla aktywnego linku */
+  border-bottom: 3px solid #3498db;
+  font-weight: 600;
+}
+
+/* Główna zawartość */
+main {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.view {
+  display: block;
+}
+
+.hidden {
+  display: none;
+}
+
+h2 {
+  margin-bottom: 25px;
+  color: #2c3e50;
+  font-weight: 600;
+  font-size: 22px;
+}
+
+h3 {
+  margin: 25px 0 15px;
+  color: #34495e; /* Ciemniejszy szary dla h3 */
+  font-weight: 500;
+  font-size: 18px;
+}
+
+/* Style dla zakładek */
+.tabs {
+  margin-bottom: 20px;
+  display: flex;
+  gap: 8px;
+  background-color: white;
+  border-radius: 8px;
+  padding: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.tab-button {
+  padding: 10px 16px;
+  border: 1px solid #e0e0e0;
+  background-color: white;
+  cursor: pointer;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 14px;
+  color: #333 !important; /* Domyślny kolor tekstu z priorytetem */
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  font-family: "Poppins", sans-serif;
+}
+
+.tab-button.tab-active {
+  background-color: var(--primary-color);
+  color: white !important; /* Kolor tekstu ustawiony na biały z priorytetem */
+  border-color: var(--primary-color);
+  box-shadow: 0 2px 4px rgba(52, 152, 219, 0.2);
+}
+
+.tab-button:hover:not(.tab-active) {
+  background-color: #f8f9fa;
+  border-color: #ccc;
+  color: #2c3e50;
+}
+
+.tab-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+/* Style dla formularza i jego elementów */
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+input[type="date"] {
+  padding: 10px 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+  width: 220px;
+  font-family: "Poppins", sans-serif;
+  transition: border-color 0.3s ease;
+}
+
+input[type="date"]:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+/* Karty zasobów */
+.resources-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.resource-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.resource-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+  border-color: #4285f4;
+}
+
+.resource-card h4 {
+  color: #3498db;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+/* Widok rezerwacji */
+#back-to-list {
+  display: inline-block;
+  margin-bottom: 20px;
+  color: #3498db;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+#back-to-list:hover {
+  color: #2980b9;
+}
+
+.reservation-details {
+  margin-bottom: 20px;
+}
+
+/* Sloty czasowe */
+.time-slots {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.time-slot {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.time-slot:hover {
+  border-color: #4285f4;
+  background-color: #f5f9ff;
+}
+
+.time-slot.selected {
+  background-color: #3498db;
+  color: white;
+  border-color: #3498db;
+  font-weight: 500;
+}
+
+/* Przyciski */
+.btn {
+  color: white;
+  border: none;
+  padding: 10px 20px; /* Zmniejszony padding */
+  border-radius: 6px; /* Bardziej zaokrąglone rogi */
+  cursor: pointer;
+  font-size: 15px; /* Nieco mniejszy font */
+  font-weight: 500;
+  transition: all 0.3s ease;
+  text-transform: uppercase; /* Wielkie litery dla lepszej czytelności */
+  letter-spacing: 0.5px;
+}
+
+.btn-primary {
+  background-color: #3498db; /* Nowy kolor główny */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary:hover {
+  background-color: #2980b9; /* Ciemniejszy odcień przy najechaniu */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  transform: translateY(-1px);
+}
+
+.btn-danger {
+  background-color: #e74c3c; /* Nowy kolor dla przycisku danger */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.btn-danger:hover {
+  background-color: #c0392b; /* Ciemniejszy odcień przy najechaniu */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  transform: translateY(-1px);
+}
+
+/* Lista rezerwacji */
+.reservations-list {
+  border-top: 1px solid #eee;
+}
+
+.reservation-item {
+  padding: 15px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.reservation-item h3 {
+  color: #3498db;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+/* Komunikat sukcesu */
+.success-message {
+  background-color: #e8f5e9;
+  border: 1px solid #4caf50;
+  color: #2e7d32;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.success-message h3 {
+  color: #2e7d32;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.success-message .close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: #2e7d32;
+  font-size: 20px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  font-weight: bold;
+}
+
+/* Niestandardowe okno dialogowe potwierdzenia */
+.confirm-dialog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.confirm-dialog-overlay.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.confirm-dialog {
+  background-color: white;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  width: 90%;
+  max-width: 450px;
+  text-align: center;
+  transform: scale(0.9);
+  transition: transform 0.3s ease;
+}
+
+.confirm-dialog-overlay.visible .confirm-dialog {
+  transform: scale(1);
+}
+
+.confirm-dialog h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #2c3e50;
+  font-size: 20px;
+}
+
+.confirm-dialog p {
+  margin-bottom: 25px;
+  color: #555;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.confirm-dialog-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.confirm-dialog-buttons .btn {
+  min-width: 120px;
+}
+
+.btn-secondary {
+  background-color: #bdc3c7; /* Jasnoszary dla przycisku Anuluj */
+  color: #2c3e50;
+}
+
+.btn-secondary:hover {
+  background-color: #95a5a6;
+}
+
+/* Stopka */
+footer {
+  text-align: center;
+  color: #777;
+  font-size: 14px;
+  padding: 10px 0;
+}

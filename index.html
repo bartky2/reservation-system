@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>System Rezerwacji Zasobów</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>System Rezerwacji Zasobów</h1>
+        <div class="user-info">
+          <span id="logged-user"
+            >Zalogowany jako: Jan Kowalski (Pracownik)</span
+          >
+        </div>
+      </header>
+
+      <nav>
+        <ul>
+          <li><a href="#" class="active" id="main-panel">Panel Główny</a></li>
+          <li><a href="#" id="my-reservations">Moje Rezerwacje</a></li>
+        </ul>
+      </nav>
+
+      <div id="confirm-dialog-overlay" class="confirm-dialog-overlay">
+        <div class="confirm-dialog">
+          <h3 id="confirm-dialog-title">Potwierdzenie</h3>
+          <p id="confirm-dialog-text">Czy na pewno chcesz wykonać tę akcję?</p>
+          <div class="confirm-dialog-buttons">
+            <button id="confirm-dialog-ok" class="btn btn-primary">OK</button>
+            <button id="confirm-dialog-cancel" class="btn btn-secondary">
+              Anuluj
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div id="success-message" class="success-message hidden">
+        <button class="close-btn">×</button>
+        <h3>Sukces!</h3>
+        <p id="success-text">Twoja rezerwacja została pomyślnie utworzona.</p>
+        <p id="reservation-info"></p>
+        <p><a href="#" id="view-reservations">Zobacz Moje Rezerwacje</a></p>
+      </div>
+
+      <main id="content">
+        <!-- Zawartość będzie dynamicznie zmieniana przez JavaScript -->
+        <div id="main-view" class="view">
+          <h2>Zarezerwuj Zasób</h2>
+          <div class="form-group">
+            <label for="date-picker">Wybierz datę:</label>
+            <input type="date" id="date-picker" value="2025-06-08" />
+          </div>
+
+          <div class="tabs">
+            <button class="tab-button tab-active" data-category="all">Wszystkie</button>
+            <button class="tab-button" data-category="conference-room">Sale Konferencyjne</button>
+            <button class="tab-button" data-category="car">Samochody</button>
+            <button class="tab-button" data-category="computer-equipment">Sprzęt Komputerowy</button>
+            <!-- Można dodać więcej zakładek dla innych kategorii -->
+          </div>
+          <h3>Dostępne Zasoby:</h3>
+          <div class="resources-container">
+            <!-- Karty zasobów będą generowane dynamicznie przez JavaScript -->
+          </div>
+        </div>
+
+        <div id="reservation-view" class="view hidden">
+          <a href="#" id="back-to-list">&larr; Wróć do listy zasobów</a>
+          <h2 id="reservation-title">Rezerwacja: Sala Konferencyjna A</h2>
+          <div class="reservation-details">
+            <p>Data: <span id="reservation-date">2025-06-08</span></p>
+            <p>Pojemność: <span id="reservation-capacity">10 osób</span></p>
+          </div>
+
+          <h3>Wybierz godzinę:</h3>
+          <div class="time-slots">
+            <button class="time-slot">08:00</button>
+            <button class="time-slot">09:00</button>
+            <button class="time-slot">10:00</button>
+            <button class="time-slot">11:00</button>
+            <button class="time-slot">12:00</button>
+            <button class="time-slot">13:00</button>
+            <button class="time-slot">14:00</button>
+            <button class="time-slot">15:00</button>
+            <button class="time-slot">16:00</button>
+            <button class="time-slot">17:00</button>
+          </div>
+
+          <button id="reserve-btn" class="btn-primary">Zarezerwuj</button>
+        </div>
+
+        <div id="my-reservations-view" class="view hidden">
+          <h2>Moje Rezerwacje</h2>
+          <div class="reservations-list">
+            <!-- Przykładowa rezerwacja -->
+            <div class="reservation-item">
+              <h3>Sala Konferencyjna A</h3>
+              <p>Data: 2025-06-08, Godzina: 09:00</p>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <footer>
+        <p>Prototyp systemu rezerwacji &copy; 2025</p>
+      </footer>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
